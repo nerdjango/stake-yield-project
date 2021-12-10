@@ -13,10 +13,10 @@ contract YieldFarm is Ownable {
     mapping(address => address) public tokenPriceFeedMapping;
     address[] public stakers;
     address[] public allowedTokens;
-    IERC20 public dappToken;
+    IERC20 public DFT;
 
-    constructor(address _dappTokenAddress) {
-        dappToken = IERC20(_dappTokenAddress);
+    constructor(address _DFTAddress) {
+        DFT = IERC20(_DFTAddress);
     }
 
     function setPriceFeedContract(address _token, address _priceFeed)
@@ -53,7 +53,7 @@ contract YieldFarm is Ownable {
         ) {
             address recipient = stakers[stakersIndex];
             uint256 userTotalValue = getUserTotalValue(recipient);
-            dappToken.transfer(recipient, userTotalValue);
+            DFT.transfer(recipient, userTotalValue);
             // send them a token reward based on their total value locked
         }
     }
